@@ -40,6 +40,10 @@
 					this.append(this.cards[l].getHTML());
 			}
         }
+		/* demo flip*/
+		this.find('.playingCard').click(function(){
+			$(this).find('.front').toggle();
+		});
         this.draw = function() {
             return this.cards.length > 0 ? this.cards.shift() : null;
         };

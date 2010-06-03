@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>JavaScript Deck of Cards	</title>
+	<link rel="stylesheet" href="css/main.css" type="text/css" />
+	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--[if lt IE 7]>
+        <link rel="stylesheet" type="text/css" media="all" href="css/ie6.css"/>
+    <![endif]-->
+	<!--[if lt IE 9]>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" media="all" href="jquery.playingcards.css"/>
+</head>
+<body id="index">
+	<div id="cardDeck"></div>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.playingcards.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#cardDeck").playingCards();
+		});
+	</script>
+</body>
+</html>

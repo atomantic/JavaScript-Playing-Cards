@@ -13,7 +13,7 @@ What it does:
 Currently, it just creates a deck and spits out the cards on whatever element you attach it to.
 Eventually, this library will have game packs and start the card table with a deck and manage hands + discard pile
 
-Demo: http://intellectualpirates.net/jquery.playingcards
+Demo: http://intellectualpirates.net/playingcards
 
 Usage:
 

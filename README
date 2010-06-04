@@ -17,9 +17,13 @@ Demo: http://intellectualpirates.net/jquery.playingcards
 
 Usage:
 
-$('#cardTable').playingCards();
+$('#cardTable').playingCards(); // will lay out a random deck on the cardTable
+
+or
+
+var cardDeck = new playingCards(); // will create a new deck object
 
 override defaults for playingCards() and for card() with
 
-$.playingCards.defaults
-$.playingCards.card.defaults
+playingCards.defaults
+playingCards.card.defaults

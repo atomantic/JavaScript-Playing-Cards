@@ -11,16 +11,22 @@
 	<!--[if lt IE 9]>
 		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
 	<![endif]-->
-	<link rel="stylesheet" type="text/css" media="all" href="jquery.playingcards.css"/>
+	<link rel="stylesheet" type="text/css" media="all" href="playingcards.css"/>
 </head>
 <body id="index">
 	<div id="cardDeck"></div>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script type="text/javascript" src="jquery.playingcards.js"></script>
+	<script type="text/javascript" src="playingCards.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#cardDeck").playingCards();
-		});
+		if (window.addEventListener) {
+			window.addEventListener("load",initPlayingCards,false);
+		} else if (window.attachEvent) {
+			window.attachEvent("onload",initPlayingCards);
+		} else {
+			window.onload = function() {initPlayingCards();}
+		}
+		function initPlayingCards() { 
+			cardDeck = new playingCards();
+		}
 	</script>
 </body>
 </html>

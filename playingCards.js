@@ -26,10 +26,17 @@ if (Array.indexOf === undefined) {
 
  (function($) {
 
+	/**
+	 * The playing card library core object
+	 *
+	 * @param obj conf Configuration option overrides
+	 *
+	 * @return obj an instance of the constructed library object (deck of cards)
+	 */
     var playingCards = window.playingCards = function(conf) {
         var c = objExtend(playingCards.defaults, conf);
         if (! (this instanceof arguments.callee)) {
-            c.el = $(this);
+            c.el = $(this); // capture the context (this will be the cardTable/Deck element)
             return new arguments.callee(c);
         }
         this.conf = c;
@@ -45,6 +52,9 @@ if (Array.indexOf === undefined) {
         // attach this as an extension to the library
         $.fn.playingCards = playingCards;
     }
+	/**
+	 * initializer - builds the deck
+	 */
     playingCards.prototype.init = function() {
         var o = this.conf;
         this.cards = [];
@@ -68,16 +78,29 @@ if (Array.indexOf === undefined) {
     };
     /**
      * draw a card
+	 * @return mixed (object|null) A card object (if a card is available)
      */
     playingCards.prototype.draw = function() {
         return this.cards.length > 0 ? this.cards.pop() : null;
     };
+    /**
+	 * add a card to the top of the deck
+	 */
     playingCards.prototype.addCard = function(card) {
         this.cards.push(card);
     };
+    /**
+	 * get the number of cards remaining in the deck 
+	 * (easy enough just to call cardObject.cards.length but hey)
+	 */
     playingCards.prototype.count = function() {
         return this.cards.length;
     };
+    /**
+     * shuffle the deck
+     *
+     * @param int n The number of times to shuffle (defaults to 5)
+     */
     playingCards.prototype.shuffle = function(n) {
         if (!n) {
             n = 5;
@@ -99,6 +122,7 @@ if (Array.indexOf === undefined) {
     };
     /*
 	 * requires jquery (currently)
+	 * TODO: put this in a UI extension pack along with all the other demo methods
 	 */
     playingCards.prototype.spread = function(dest) {
         if (!this.conf.el && !dest) {
@@ -112,6 +136,9 @@ if (Array.indexOf === undefined) {
             to.append(this.cards[i].getHTML());
         }
     };
+    /**
+	 * configuration defaults
+	 */
     playingCards.defaults = {
         "decks": 1,
         // TODO: enable 'font' option -- loading cards.ttf
@@ -166,14 +193,26 @@ if (Array.indexOf === undefined) {
         this.suitString = suitString;
         return this;
     };
+    /**
+	 * configuration defaults
+	 */
     playingCards.card.defaults = {
         "singleFace": false
         // false will use a different image for each suit/face, true will use diamond image for all
     };
+    /**
+	 * get the text representation of the card
+	 */
     playingCards.card.prototype.toString = function() {
         // TODO: localize "of"
         return this.suitString !== "" ? this.rankString + " of " + this.suitString: this.rankString;
     };
+	/**
+	 * generate (and cache) html for the card
+	 * TODO: part of the UI extension?
+	 * 
+	 * @return string The HTML block to show the card
+	 */
     playingCards.card.prototype.getHTML = function() {
         if (this.html) {
             return this.html;
@@ -209,6 +248,12 @@ if (Array.indexOf === undefined) {
         this.html = strBuild.join('');
         return this.html;
     };
+	/**
+ 	 * build the middle of the playing card HTML
+	 * TODO: UI extension?
+	 *
+	 * @return string The HTML block for the middle of the card
+ 	 */
     playingCards.card.prototype.buildIconHTML = function() {
         // TODO: could we optimize this with a for loop that breaks/continues to named positions?
         if (this.rank === "A") {

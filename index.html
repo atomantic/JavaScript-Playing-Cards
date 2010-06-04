@@ -12,11 +12,78 @@
 		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" media="all" href="playingcards.css"/>
+	<style type="text/css">
+	h2{
+		clear:both;
+	}
+	#error{
+		display:none;color:#f00;border:1px solid #f60;padding:5px;margin:5px;
+	}
+	</style>
 </head>
 <body id="index">
+	<h2>JavaScript Deck of Cards</h2>
+	<p>This page has just created a deck of cards in JavaScript, outputting them in CSS/HTML with minimal graphics. Play with the controls to see some of the base methods in action.</p>
+	<p><a href="http://wiki.github.com/atomantic/JavaScript-Playing-Cards/">Follow this project on github</a>.</p>
+	<div id="error"></div>
+	<input type="button" id="shuffler" value="shuffle" />
+	<input type="button" id="draw" value="draw a card" />
+	<input type="button" id="addcard" value="add drawn card back" />
+	<h2>Card Deck</h2>
 	<div id="cardDeck"></div>
+	<h2>Your Hand</h2>
+	<div id="yourHand"></div>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script type="text/javascript" src="playingCards.js"></script>
 	<script type="text/javascript">
+		/*
+		 * example throwing cards on the table
+		 */
+		$(document).ready(function(){
+			var cardDeck = $("#cardDeck").playingCards();
+	        cardDeck.spread(); // show it
+	
+			var hand = [];
+			var showError = function(msg){
+				$('#error').html(msg).show();
+				setTimeout(function(){
+					$('#error').fadeOut('slow');
+				},3000);
+			}
+			var showHand = function(){
+				var el = $('#yourHand')
+				el.html('');
+				for(var i=0;i<hand.length;i++){
+					el.append(hand[i].getHTML());
+				}
+			}
+			$('#shuffler').click(function(){
+				cardDeck.shuffle();
+				cardDeck.spread(); // update card table
+			});
+			$('#draw').click(function(){
+				var c = cardDeck.draw();
+				if(!c){
+					showError('no more cards');
+					return;
+				}
+				hand[hand.length] = c;
+				cardDeck.spread();
+				showHand();
+			});
+			$('#addcard').click(function(){
+				if(!hand.length){
+					showError('your hand is empty');
+					return;
+				}
+				var c = hand.pop();
+				showHand();
+				cardDeck.addCard(c);
+				cardDeck.spread();
+			});
+		});
+	    /*
+		// if we weren't using jquery to handle the document ready state, we would do this:
 		if (window.addEventListener) {
 			window.addEventListener("load",initPlayingCards,false);
 		} else if (window.attachEvent) {
@@ -27,6 +94,7 @@
 		function initPlayingCards() { 
 			cardDeck = new playingCards();
 		}
+		*/
 	</script>
 </body>
 </html>

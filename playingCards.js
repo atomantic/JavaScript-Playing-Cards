@@ -26,24 +26,23 @@ if (Array.indexOf === undefined) {
 
  (function($) {
 
-    var playingCards = window.playingCards = function(conf) {	
+    var playingCards = window.playingCards = function(conf) {
         var c = objExtend(playingCards.defaults, conf);
         if (! (this instanceof arguments.callee)) {
-			c.el = $(this);
+            c.el = $(this);
             return new arguments.callee(c);
         }
-		this.conf = c;
-		this.lib = $;
+        this.conf = c;
+        this.lib = $;
         this.init();
-		if(this.conf.startShuffled){
-			this.shuffle(5);
-		}
-		this.spread();
-		return this;
+        if (this.conf.startShuffled) {
+            this.shuffle(5);
+        }
+        return this;
     };
     if ($.fn) {
         // we can use library methods
-		// attach this as an extension to the library
+        // attach this as an extension to the library
         $.fn.playingCards = playingCards;
     }
     playingCards.prototype.init = function() {
@@ -71,7 +70,7 @@ if (Array.indexOf === undefined) {
      * draw a card
      */
     playingCards.prototype.draw = function() {
-        return this.cards.length > 0 ? this.cards.shift() : null;
+        return this.cards.length > 0 ? this.cards.pop() : null;
     };
     playingCards.prototype.addCard = function(card) {
         this.cards.push(card);
@@ -80,6 +79,9 @@ if (Array.indexOf === undefined) {
         return this.cards.length;
     };
     playingCards.prototype.shuffle = function(n) {
+        if (!n) {
+            n = 5;
+        }
         var r;
         // random #
         var tmp;
@@ -95,24 +97,26 @@ if (Array.indexOf === undefined) {
             }
         }
     };
-	/*
+    /*
 	 * requires jquery (currently)
 	 */
-	    playingCards.prototype.spread = function(dest) {
-			if(!this.conf.el && !dest){
-				return false;
-			}
-			var to = this.conf.el || dest;
-	        var l = this.cards.length;
-	        for (var i = 0; i < l; i++) {
-	            to.append(this.cards[i].getHTML());
-	        }
-	    };
+    playingCards.prototype.spread = function(dest) {
+        if (!this.conf.el && !dest) {
+            return false;
+        }
+        var to = this.conf.el || dest;
+        var l = this.cards.length;
+        to.html('');
+        // clear (just a demo)
+        for (var i = 0; i < l; i++) {
+            to.append(this.cards[i].getHTML());
+        }
+    };
     playingCards.defaults = {
         "decks": 1,
         // TODO: enable 'font' option -- loading cards.ttf
         "renderMode": 'css',
-		"startShuffled":true,
+        "startShuffled": true,
         "jokers": 2,
         "jokerText": "Joker",
         "ranks": {
@@ -288,4 +292,4 @@ if (Array.indexOf === undefined) {
         }
         return o;
     }
-})(typeof(jQuery) !== 'undefined' ? jQuery: function(){});
+})(typeof(jQuery) !== 'undefined' ? jQuery: function() {});

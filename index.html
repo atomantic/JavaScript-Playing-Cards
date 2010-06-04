@@ -28,7 +28,8 @@
 	<div id="error"></div>
 	<input type="button" id="shuffler" value="shuffle" />
 	<input type="button" id="draw" value="draw a card" />
-	<input type="button" id="addcard" value="add drawn card back" />
+	<input type="button" id="addCard" value="add drawn card back" />
+	<input type="button" id="shuffleDraw" value="shuffle, then draw" />
 	<h2>Card Deck</h2>
 	<div id="cardDeck"></div>
 	<h2>Your Hand</h2>
@@ -57,11 +58,11 @@
 					el.append(hand[i].getHTML());
 				}
 			}
-			$('#shuffler').click(function(){
+			var doShuffle = function(){
 				cardDeck.shuffle();
 				cardDeck.spread(); // update card table
-			});
-			$('#draw').click(function(){
+			}
+			var doDrawCard = function(){
 				var c = cardDeck.draw();
 				if(!c){
 					showError('no more cards');
@@ -70,8 +71,14 @@
 				hand[hand.length] = c;
 				cardDeck.spread();
 				showHand();
+			};
+			$('#shuffler').click(doShuffle);
+			$('#draw').click(doDrawCard);
+			$('#shuffleDraw').click(function(){
+				doShuffle();
+				doDrawCard();
 			});
-			$('#addcard').click(function(){
+			$('#addCard').click(function(){
 				if(!hand.length){
 					showError('your hand is empty');
 					return;

@@ -76,6 +76,10 @@ if (Array.indexOf === undefined) {
             }
         }
     };
+	// TODO: create more methods:
+	// playingCards.prototype.order (set to out-of-box ordering) 
+	// -- do we want other special formations (like trick deck ordering systems that deal perfect hands)?
+	// -- probably going to leave this as an extension option
     /**
      * draw a card
 	 * @return mixed (object|null) A card object (if a card is available)

@@ -1,0 +1,140 @@
+/**
+ * deck of cards.
+ * This can be used to play standard card games (which could be additional rule modules attached to this set)
+ * 
+ * @author Adam Eivy (antic | atomantic)
+ * @license MIT (do what you like but keep the license)
+ */
+.playingCard { /* to show the back of the card, hide the front */
+position: relative;
+background-color:#036;
+border:1px solid #666;
+font-size: 20px;
+float: left;
+width: 3.8em;
+height: 5em;
+}
+
+.playingCard .front {
+background-color: #fff;
+color: #000;
+position: absolute;
+width: 100%;
+height: 100%;
+}
+
+.playingCard .corner {
+position: absolute;
+font-size: .5em;
+left: 0.25em;
+top: 0.25em;
+}
+.playingCard .cornerBR {
+left: auto;
+top: auto;
+right: 0.25em;
+bottom: 0.25em;
+}
+
+.playingCard .flip {
+	-webkit-transform: rotate(180deg); 
+	-moz-transform: rotate(180deg);
+	/*filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);*/
+	writing-mode: tb-rl;
+}
+
+.playingCard .red {
+color: #f00;
+}
+
+.playingCard .suit {
+position: absolute;
+z-index:2;
+}
+/* large center Ace style suit */
+.playingCard .suit0 {
+font-size: 3em;
+left: 0.3em;
+top: 0.3em;
+}
+
+.playingCard .face {
+position: absolute;
+z-index:1;
+border: 1px solid #000;
+left: 0.6em;
+top: 0.45em;
+width: 2.5em;
+height: 4.em;
+}
+/*
+.playingCard .J {
+background-image: url("img/J.gif");
+}
+.playingCard .Q {
+background-image: url("img/Q.gif");
+}
+.playingCard .K {
+background-image: url("img/K.gif");
+}
+*/
+.playingCard .A1 {
+left: 0.7em;
+top: 0.5em;
+}
+.playingCard .A2 {
+left: 0.7em;
+top: 1.5em;
+}
+.playingCard .A3 {
+left: 0.7em;
+top: 2.0em;
+}
+.playingCard .A4 {
+left: 0.7em;
+top: 2.5em;
+}
+.playingCard .A5 {
+left: 0.7em;
+top: 3.5em;
+}
+.playingCard .B1 {
+left: 1.6em;
+top: 0.5em;
+}
+.playingCard .B2 {
+left: 1.6em;
+top: 1.0em;
+}
+.playingCard .B3 {
+left: 1.6em;
+top: 2.0em;
+}
+.playingCard .B4 {
+left: 1.6em;
+top: 3.0em;
+}
+.playingCard .B5 {
+left: 1.6em;
+top: 3.5em;
+}
+.playingCard .C1 {
+left: 2.45em;
+top: 0.5em;
+}
+.playingCard .C2 {
+left: 2.45em;
+top: 1.5em;
+}
+.playingCard .C3 {
+left: 2.45em;
+top: 2.0em;
+}
+.playingCard .C4 {
+left: 2.45em;
+top: 2.5em;
+}
+.playingCard .C5 {
+left: 2.45em;
+top: 3.5em;
+}

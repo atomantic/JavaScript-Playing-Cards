@@ -14,17 +14,16 @@
 if (Array.indexOf === undefined) {
     // doens't exist in IE
     /* Finds the index of the first occurence of item in the array, or -1 if not found */
-    Array.prototype.indexOf = function(item) {
+    Array.prototype.indexOf = function(v) {
         for (var i = 0; i < this.length; ++i) {
-            if (this[i] === item) {
+            if (this[i] === v) {
                 return i;
             }
         }
         return - 1;
     };
 }
-
- (function($) {
+ (function(window,document,undefined){
 
 	/**
 	 * The playing card library core object
@@ -35,9 +34,9 @@ if (Array.indexOf === undefined) {
 	 */
     var playingCards = window.playingCards = function(conf) {
         var c = objExtend(playingCards.defaults, conf);
-        if (! (this instanceof arguments.callee)) {
+        if (! (this instanceof playingCards)) {
             c.el = $(this); // capture the context (this will be the cardTable/Deck element)
-            return new arguments.callee(c);
+            return new playingCards(c);
         }
         this.conf = c;
         this.lib = $;
@@ -47,11 +46,6 @@ if (Array.indexOf === undefined) {
         }
         return this;
     };
-    if ($.fn) {
-        // we can use library methods
-        // attach this as an extension to the library
-        $.fn.playingCards = playingCards;
-    }
 	/**
 	 * initializer - builds the deck
 	 */
@@ -185,8 +179,8 @@ if (Array.indexOf === undefined) {
 	 * @return object The card object
 	 */
     playingCards.card = function(rank, rankString, suit, suitString, conf) {
-        if (! (this instanceof arguments.callee)) {
-            return new arguments.callee(rank, rankString, suit, suitString, conf);
+        if (! (this instanceof playingCards.card)) {
+            return new playingCards.card(rank, rankString, suit, suitString, conf);
         }
 
         this.conf = objExtend(playingCards.card.defaults, conf);
@@ -263,7 +257,9 @@ if (Array.indexOf === undefined) {
         if (this.rank === "A") {
             return ['<div class="suit suit0">', this.suitCode, '</div>'];
         }
-        if (this.rank === "J" || this.rank === "Q" || this.rank === "K" || this.rank === "N") {
+	    var ret = [],
+			list = ['J', 'Q', 'K', 'N'];
+	    if (list.indexOf(this.rank) !== -1) {
             var n = 'D';
             if (!this.conf.singleFace) {
                 n = this.suit;
@@ -274,8 +270,7 @@ if (Array.indexOf === undefined) {
             '<div class="suit C5 flip">', this.suitCode, '</div>'
             ];
         }
-        var ret = [];
-        var list = ['4', '5', '6', '7', '8', '9', '10'];
+        list = ['4', '5', '6', '7', '8', '9', '10'];
         // all of these will have A1, A5, C1, C5 icons
         if (list.indexOf(this.rank) !== -1) {
             ret = ret.concat([
@@ -341,4 +336,4 @@ if (Array.indexOf === undefined) {
         }
         return o;
     }
-})(typeof(jQuery) !== 'undefined' ? jQuery: function() {});
+})(this,this.document);

@@ -14,17 +14,16 @@
 if (Array.indexOf === undefined) {
     // doens't exist in IE
     /* Finds the index of the first occurence of item in the array, or -1 if not found */
-    Array.prototype.indexOf = function(item) {
+    Array.prototype.indexOf = function(v) {
         for (var i = 0; i < this.length; ++i) {
-            if (this[i] === item) {
+            if (this[i] === v) {
                 return i;
             }
         }
         return - 1;
     };
 }
-
- (function($) {
+ (function(window,document,undefined){
 
 	/**
 	 * The playing card library core object
@@ -35,9 +34,9 @@ if (Array.indexOf === undefined) {
 	 */
     var playingCards = window.playingCards = function(conf) {
         var c = objExtend(playingCards.defaults, conf);
-        if (! (this instanceof arguments.callee)) {
+        if (! (this instanceof playingCards)) {
             c.el = $(this); // capture the context (this will be the cardTable/Deck element)
-            return new arguments.callee(c);
+            return new playingCards(c);
         }
         this.conf = c;
         this.lib = $;
@@ -47,11 +46,6 @@ if (Array.indexOf === undefined) {
         }
         return this;
     };
-    if ($.fn) {
-        // we can use library methods
-        // attach this as an extension to the library
-        $.fn.playingCards = playingCards;
-    }
 	/**
 	 * initializer - builds the deck
 	 */
@@ -185,8 +179,8 @@ if (Array.indexOf === undefined) {
 	 * @return object The card object
 	 */
     playingCards.card = function(rank, rankString, suit, suitString, conf) {
-        if (! (this instanceof arguments.callee)) {
-            return new arguments.callee(rank, rankString, suit, suitString, conf);
+        if (! (this instanceof playingCards.card)) {
+            return new playingCards.card(rank, rankString, suit, suitString, conf);
         }
 
         this.conf = objExtend(playingCards.card.defaults, conf);
@@ -211,123 +205,6 @@ if (Array.indexOf === undefined) {
         // TODO: localize "of"
         return this.suitString !== "" ? this.rankString + " of " + this.suitString: this.rankString;
     };
-	/**
-	 * generate (and cache) html for the card
-	 * TODO: part of the UI extension?
-	 * 
-	 * @return string The HTML block to show the card
-	 */
-    playingCards.card.prototype.getHTML = function() {
-        if (this.html) {
-            return this.html;
-        }
-        this.suitCode = "&nbsp;";
-        this.colorCls = '';
-        switch (this.suit) {
-        case "S":
-            this.suitCode = "&spades;";
-            break;
-        case "D":
-            this.colorCls = "red";
-            this.suitCode = "&diams;";
-            break;
-        case "C":
-            this.suitCode = "&clubs;";
-            break;
-        case "H":
-            this.colorCls = "red";
-            this.suitCode = "&hearts;";
-            break;
-        }
-
-        // concatenating strings with "+" is slow, using array join is faster: http://code.google.com/speed/articles/optimizing-javascript.html
-        // TODO: run perf test to be sure that in this case we are getting better perf in IE
-        var txt = this.rank;
-        if (this.rank === "N") {
-            txt = this.rankString.split('').join('<br />');
-        }
-        var strBuild = ['<div class="playingCard"><div class="front ', this.colorCls, '"><div class="corner">', txt, '<br />', this.suitCode, '</div>'];
-        strBuild = strBuild.concat(this.buildIconHTML());
-        strBuild = strBuild.concat('<div class="corner cornerBR flip">', txt, '<br />', this.suitCode, '</div></div></div>');
-        this.html = strBuild.join('');
-        return this.html;
-    };
-	/**
- 	 * build the middle of the playing card HTML
-	 * TODO: UI extension?
-	 *
-	 * @return string The HTML block for the middle of the card
- 	 */
-    playingCards.card.prototype.buildIconHTML = function() {
-        // TODO: could we optimize this with a for loop that breaks/continues to named positions?
-        if (this.rank === "A") {
-            return ['<div class="suit suit0">', this.suitCode, '</div>'];
-        }
-        if (this.rank === "J" || this.rank === "Q" || this.rank === "K" || this.rank === "N") {
-            var n = 'D';
-            if (!this.conf.singleFace) {
-                n = this.suit;
-            }
-            return [
-            '<div class="suit A1">', this.suitCode, '</div>',
-            '<img class="suit ', this.rank, ' face" src="img/', this.rank, n, '.gif"/>',
-            '<div class="suit C5 flip">', this.suitCode, '</div>'
-            ];
-        }
-        var ret = [];
-        var list = ['4', '5', '6', '7', '8', '9', '10'];
-        // all of these will have A1, A5, C1, C5 icons
-        if (list.indexOf(this.rank) !== -1) {
-            ret = ret.concat([
-            '<div class="suit A1">', this.suitCode, '</div>',
-            '<div class="suit A5 flip">', this.suitCode, '</div>',
-            '<div class="suit C1">', this.suitCode, '</div>',
-            '<div class="suit C5 flip">', this.suitCode, '</div>'
-            ]);
-        }
-        list = ['2', '3'];
-        if (list.indexOf(this.rank) !== -1) {
-            ret = ret.concat([
-            '<div class="suit B1">', this.suitCode, '</div>',
-            '<div class="suit B5 flip">', this.suitCode, '</div>'
-            ]);
-        }
-        list = ['3', '5', '9'];
-        if (list.indexOf(this.rank) !== -1) {
-            ret = ret.concat([
-            '<div class="suit B3">', this.suitCode, '</div>'
-            ]);
-        }
-        list = ['6', '7', '8'];
-        if (list.indexOf(this.rank) !== -1) {
-            ret = ret.concat([
-            '<div class="suit A3">', this.suitCode, '</div>',
-            '<div class="suit C3">', this.suitCode, '</div>'
-            ]);
-        }
-        list = ['7', '8', '10'];
-        if (list.indexOf(this.rank) !== -1) {
-            ret = ret.concat([
-            '<div class="suit B2">', this.suitCode, '</div>'
-            ]);
-        }
-        list = ['8', '10'];
-        if (list.indexOf(this.rank) !== -1) {
-            ret = ret.concat([
-            '<div class="suit B4 flip">', this.suitCode, '</div>'
-            ]);
-        }
-        list = ['9', '10'];
-        if (list.indexOf(this.rank) !== -1) {
-            ret = ret.concat([
-            '<div class="suit A2">', this.suitCode, '</div>',
-            '<div class="suit A4 flip">', this.suitCode, '</div>',
-            '<div class="suit C2">', this.suitCode, '</div>',
-            '<div class="suit C4 flip">', this.suitCode, '</div>'
-            ]);
-        }
-        return ret;
-    };
 
     /**
 	 * Simple object extend to override default settings
@@ -341,4 +218,4 @@ if (Array.indexOf === undefined) {
         }
         return o;
     }
-})(typeof(jQuery) !== 'undefined' ? jQuery: function() {});
+})(this,this.document);

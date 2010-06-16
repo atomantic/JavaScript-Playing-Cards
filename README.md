@@ -1,29 +1,32 @@
-JavaScript & CSS:
-@author Adam Eivy (antic | atomantic)
-@link http://intellectualpirates.net
+#License#
+JavaScript & CSS:  
+@author Adam Eivy (antic | atomantic)  
+@link [http://intellectualpirates.net](http://intellectualpirates.net)  
 @license MIT (see LICENSE file)
 
-Card Face images: 
-@author David Bellot
-@link http://david.bellot.free.fr/svg-cards/
-@license http://creativecommons.org/licenses/by-sa/2.5/
+Card Face images:   
+@author David Bellot  
+@link [http://david.bellot.free.fr/svg-cards/](http://david.bellot.free.fr/svg-cards/)  
+@license [http://creativecommons.org/licenses/by-sa/2.5/](http://creativecommons.org/licenses/by-sa/2.5/)  
 
-What it does:
+#What it does:#
 
-Currently, it just creates a deck and spits out the cards on whatever element you attach it to.
-Eventually, this library will have game packs and start the card table with a deck and manage hands + discard pile
+The library comes in multiple parts. You can either just use the playingCard.js library, which has no UI rendering (just creates deck objects with the standard methods) or you can add on the playingCards.ui.js library, which adds the ability to render the cards to the page.
 
-Demo: http://intellectualpirates.net/playingcards
+Eventually, we will have more optional packs that determine rules of games, handle hands and the card table, etc
 
-Usage:
+#Usage:#
 
-$('#cardTable').playingCards(); // will lay out a random deck on the cardTable
+`$('#cardTable').playingCards(); // will lay out a random deck on the cardTable`
 
 or
 
-var cardDeck = new playingCards(); // will create a new deck object
+`var cardDeck = new playingCards(); // will create a new deck object`
 
 override defaults for playingCards() and for card() with
 
-playingCards.defaults
-playingCards.card.defaults
+`playingCards.defaults
+playingCards.card.defaults`
+
+View the demo source for some more examples:
+[Demo](http://atomantic.github.com/JavaScript-Playing-Cards)

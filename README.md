@@ -17,11 +17,13 @@ Eventually, we will have more optional packs that determine rules of games, hand
 
 #Usage:#
 
-`$('#cardTable').playingCards(); // will lay out a random deck on the cardTable`
-
-or
-
+If you are only using playingCards.js:  
+  
 `var cardDeck = new playingCards(); // will create a new deck object`
+
+If you are including jQuery, the playingCards.ui.js and playingCards.ui.css:
+
+`$('#cardTable').playingCards(); // will lay out a random deck on the cardTable element`
 
 override defaults for playingCards() and for card() with
 

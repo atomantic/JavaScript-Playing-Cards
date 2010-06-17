@@ -7,8 +7,10 @@
  *    playingCards.defaults
  *    playingCards.card.defaults
  * 
- * @author Adam Eivy (antic | atomantic)
- * @license MIT (do what you like but keep the license)
+ * @author Copyright (c) 2010 Adam Eivy (antic | atomantic)
+ * @license Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
  */
 
 if (Array.indexOf === undefined) {

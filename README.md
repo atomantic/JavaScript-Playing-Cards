@@ -2,7 +2,10 @@
 JavaScript & CSS:  
 @author Adam Eivy (antic | atomantic)  
 @link [http://intellectualpirates.net](http://intellectualpirates.net)  
-@license MIT (see LICENSE file)
+
+@license Copyright (c) 2010 Adam Eivy (antic | atomantic) Dual licensed under the MIT and GPL licenses:  
+ * [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)  
+ * [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html)
 
 Card Face images:   
 @author David Bellot  

@@ -22,16 +22,19 @@ Eventually, we will have more optional packs that determine rules of games, hand
 
 If you are only using playingCards.js:  
   
-`var cardDeck = new playingCards(); // will create a new deck object`
+	var cardDeck = new playingCards(); // will create a new deck object
 
 If you are including jQuery, the playingCards.ui.js and playingCards.ui.css:
 
-`$('#cardTable').playingCards(); // will lay out a random deck on the cardTable element`
+	$('#cardTable').playingCards(); // will lay out a random deck on the cardTable element
 
-override defaults for playingCards() and for card() with
+override defaults for playingCards() and for card() by adding new properties to the following objects:
 
-`playingCards.defaults
-playingCards.card.defaults`
+	playingCards.defaults
 
-View the demo source for some more examples:
+	playingCards.card.defaults
+	
+#Demos:#
+
+The repository holds a demo in index.html, which is published on the github project page:
 [Demo](http://atomantic.github.com/JavaScript-Playing-Cards)

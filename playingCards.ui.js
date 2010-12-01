@@ -3,9 +3,12 @@
  * This contains methods to render the cards and apply effects.
  * 
  * @requires playingCards.js
+ * @requires playingCards.ui.css
  * 
- * @author Adam Eivy (antic | atomantic)
- * @license MIT (do what you like but keep the license)
+ * @author Copyright (c) 2010 Adam Eivy (antic | atomantic)
+ * @license Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
  */
 
  (function($,window,document,undefined) {	
@@ -22,11 +25,12 @@
         if (!this.conf.el && !dest) {
             return false;
         }
-        var to = this.conf.el || dest;
-        var l = this.cards.length;
+        var to = this.conf.el || dest,
+			l = this.cards.length,
+			i;
         to.html('');
         // clear (just a demo)
-        for (var i = 0; i < l; i++) {
+        for (i = 0; i < l; i++) {
             to.append(this.cards[i].getHTML());
         }
     };
@@ -91,8 +95,8 @@
             '<div class="suit C5 flip">', this.suitCode, '</div>'
             ];
         }
-        var ret = [];
-        var list = ['4', '5', '6', '7', '8', '9', '10'];
+        var ret = [],
+			list = ['4', '5', '6', '7', '8', '9', '10'];
         // all of these will have A1, A5, C1, C5 icons
         if (list.indexOf(this.rank) !== -1) {
             ret = ret.concat([

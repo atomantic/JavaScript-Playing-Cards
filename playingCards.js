@@ -51,15 +51,15 @@ if (Array.indexOf === undefined) {
 	/**
 	 * initializer - builds the deck
 	 */
-    playingCards.prototype.init = function() {
-        var o = this.conf;
-        this.cards = [];
-        var l;
+    playingCards.prototype.init = function() {	
+     	this.cards = [];
+        var o = this.conf,
+			l,i,s,r;
         // populate draw pile
-        for (var i = 0; i < o.decks; i++) {
+        for (i = 0; i < o.decks; i++) {
             // standard
-            for (var s in o.suits) {
-                for (var r in o.ranks) {
+            for (s in o.suits) {
+                for (r in o.ranks) {
                     l = this.cards.length;
                     this.cards[l] = new playingCards.card(r, o.ranks[r], s, o.suits[s]);
                 }
@@ -105,14 +105,11 @@ if (Array.indexOf === undefined) {
         if (!n) {
             n = 5;
         }
-        var r;
-        // random #
-        var tmp;
-        // tmp holder
-        var l = this.cards.length;
+        var l = this.cards.length,
+			r,tmp,i,j;
 
-        for (var i = 0; i < n; i++) {
-            for (var j = 0; j < l; j++) {
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < l; j++) {
                 r = Math.floor(Math.random() * l);
                 tmp = this.cards[j];
                 this.cards[j] = this.cards[r];
@@ -128,11 +125,12 @@ if (Array.indexOf === undefined) {
         if (!this.conf.el && !dest) {
             return false;
         }
-        var to = this.conf.el || dest;
-        var l = this.cards.length;
+        var to = this.conf.el || dest,
+			l = this.cards.length,
+			i;
         to.html('');
         // clear (just a demo)
-        for (var i = 0; i < l; i++) {
+        for (i = 0; i < l; i++) {
             to.append(this.cards[i].getHTML());
         }
     };

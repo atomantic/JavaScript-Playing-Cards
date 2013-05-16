@@ -86,12 +86,13 @@
         }
         if (this.rank === "J" || this.rank === "Q" || this.rank === "K" || this.rank === "N") {
             var n = 'D';
+            var imgPrefix = this.conf.imgPrefix || '';
             if (!this.conf.singleFace) {
                 n = this.suit;
             }
             return [
             '<div class="suit A1">', this.suitCode, '</div>',
-            '<img class="suit ', this.rank, ' face" src="img/', this.rank, n, '.gif"/>',
+            '<img class="suit ', this.rank, ' face" src="', imgPrefix, 'img/', this.rank, n, '.gif"/>',
             '<div class="suit C5 flip">', this.suitCode, '</div>'
             ];
         }

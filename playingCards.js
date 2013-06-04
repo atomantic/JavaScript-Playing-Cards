@@ -185,6 +185,13 @@ if (Array.indexOf === undefined) {
 
         this.conf = objExtend(playingCards.card.defaults, conf);
 
+        if (suit === undefined) {
+            //Arguments are rank, suit
+            suit = rankString;
+            rankString = playingCards.defaults.ranks[rank];
+            suitString = playingCards.defaults.suits[suit];
+        }
+
         this.rank = rank;
         this.rankString = rankString;
         this.suit = suit;

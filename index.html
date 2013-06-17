@@ -1,45 +1,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>atomantic/JavaScript-Playing-Cards @ GitHub</title>
-	
-	<link rel="stylesheet" type="text/css" media="all" href="playingCards.ui.css"/>
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #fff;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #000000;
+    <title>atomantic/JavaScript-Playing-Cards @ GitHub</title>
+    
+    <link rel="stylesheet" type="text/css" media="all" href="playingCards.ui.css"/>
+    <style type="text/css">
+        body {
+          margin-top: 1.0em;
+          background-color: #fff;
+          font-family: "Helvetica,Arial,FreeSans";
+          color: #000000;
     }
     #container {
       margin: 0 auto;
       width: 860px;
     }
-		h1 { font-size: 40px; color: #64052a; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #64052a; }
+        h1 { font-size: 40px; color: #64052a; margin-bottom: 3px; }
+        h1 .small { font-size: 0.4em; }
+        h1 a { text-decoration: none }
+        h2 { font-size: 1.5em; color: #64052a; }
     h3 { text-align: center; color: #64052a; }
     a { color: #64052a; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
+        pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
 
-	
-	h2{
-		clear:both;
-	}
-	#error{
-		display:none;color:#f00;border:1px solid #f60;padding:5px;margin:5px;
-	}
-	</style>
-	
+    
+    h2{
+        clear:both;
+    }
+    #error{
+        display:none;color:#f00;border:1px solid #f60;padding:5px;margin:5px;
+    }
+    </style>
+    
 </head>
 
 <body>
@@ -71,86 +71,86 @@
 <br/>      </p>
 
 
-	<h2>Demo</h2>
-	<div id="error"></div>
-	<input type="button" id="shuffler" value="shuffle" />
-	<input type="button" id="draw" value="draw a card" />
-	<input type="button" id="addCard" value="add drawn card back" />
-	<input type="button" id="shuffleDraw" value="shuffle, then draw" />
-	<h2>Card Deck</h2>
-	<div id="cardDeck"></div>
-	<h2>Your Hand</h2>
-	<div id="yourHand"></div>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script type="text/javascript" src="playingCards.js"></script>
-	<script type="text/javascript" src="playingCards.ui.js"></script>
-	<script type="text/javascript">
-		/*
-		 * example throwing cards on the table
-		 */
-		$(document).ready(function(){
-			var cardDeck = $("#cardDeck").playingCards();
-	        cardDeck.spread(); // show it
-	
-			var hand = [];
-			var showError = function(msg){
-				$('#error').html(msg).show();
-				setTimeout(function(){
-					$('#error').fadeOut('slow');
-				},3000);
-			}
-			var showHand = function(){
-				var el = $('#yourHand')
-				el.html('');
-				for(var i=0;i<hand.length;i++){
-					el.append(hand[i].getHTML());
-				}
-			}
-			var doShuffle = function(){
-				cardDeck.shuffle();
-				cardDeck.spread(); // update card table
-			}
-			var doDrawCard = function(){
-				var c = cardDeck.draw();
-				if(!c){
-					showError('no more cards');
-					return;
-				}
-				hand[hand.length] = c;
-				cardDeck.spread();
-				showHand();
-			};
-			$('#shuffler').click(doShuffle);
-			$('#draw').click(doDrawCard);
-			$('#shuffleDraw').click(function(){
-				doShuffle();
-				doDrawCard();
-			});
-			$('#addCard').click(function(){
-				if(!hand.length){
-					showError('your hand is empty');
-					return;
-				}
-				var c = hand.pop();
-				showHand();
-				cardDeck.addCard(c);
-				cardDeck.spread();
-			});
-		});
-	    /*
-		// if we weren't using jquery to handle the document ready state, we would do this:
-		if (window.addEventListener) {
-			window.addEventListener("load",initPlayingCards,false);
-		} else if (window.attachEvent) {
-			window.attachEvent("onload",initPlayingCards);
-		} else {
-			window.onload = function() {initPlayingCards();}
-		}
-		function initPlayingCards() { 
-			cardDeck = new playingCards();
-		}
-		*/
-	</script>
+    <h2>Demo</h2>
+    <div id="error"></div>
+    <input type="button" id="shuffler" value="shuffle" />
+    <input type="button" id="draw" value="draw a card" />
+    <input type="button" id="addCard" value="add drawn card back" />
+    <input type="button" id="shuffleDraw" value="shuffle, then draw" />
+    <h2>Card Deck</h2>
+    <div id="cardDeck"></div>
+    <h2>Your Hand</h2>
+    <div id="yourHand"></div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="playingCards.js"></script>
+    <script type="text/javascript" src="playingCards.ui.js"></script>
+    <script type="text/javascript">
+        /*
+         * example throwing cards on the table
+         */
+        $(document).ready(function(){
+            var cardDeck = $("#cardDeck").playingCards();
+            cardDeck.spread(); // show it
+    
+            var hand = [];
+            var showError = function(msg){
+                $('#error').html(msg).show();
+                setTimeout(function(){
+                    $('#error').fadeOut('slow');
+                },3000);
+            }
+            var showHand = function(){
+                var el = $('#yourHand')
+                el.html('');
+                for(var i=0;i<hand.length;i++){
+                    el.append(hand[i].getHTML());
+                }
+            }
+            var doShuffle = function(){
+                cardDeck.shuffle();
+                cardDeck.spread(); // update card table
+            }
+            var doDrawCard = function(){
+                var c = cardDeck.draw();
+                if(!c){
+                    showError('no more cards');
+                    return;
+                }
+                hand[hand.length] = c;
+                cardDeck.spread();
+                showHand();
+            };
+            $('#shuffler').click(doShuffle);
+            $('#draw').click(doDrawCard);
+            $('#shuffleDraw').click(function(){
+                doShuffle();
+                doDrawCard();
+            });
+            $('#addCard').click(function(){
+                if(!hand.length){
+                    showError('your hand is empty');
+                    return;
+                }
+                var c = hand.pop();
+                showHand();
+                cardDeck.addCard(c);
+                cardDeck.spread();
+            });
+        });
+        /*
+        // if we weren't using jquery to handle the document ready state, we would do this:
+        if (window.addEventListener) {
+            window.addEventListener("load",initPlayingCards,false);
+        } else if (window.attachEvent) {
+            window.attachEvent("onload",initPlayingCards);
+        } else {
+            window.onload = function() {initPlayingCards();}
+        }
+        function initPlayingCards() { 
+            cardDeck = new playingCards();
+        }
+        */
+    </script>
 
     <h2>Download</h2>
     <p>

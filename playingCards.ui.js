@@ -1,3 +1,6 @@
+/*global playingCards*/
+/*jslint jquery:true */
+
 /**
  * playingCards.ui is a UI utility library extension of the playingCard.js library
  * This contains methods to render the cards and apply effects.
@@ -11,34 +14,34 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 
- (function($,window,document,undefined) {	
+ (function($,window,document,undefined) {    
 
-	if ($.fn) {
-	     // we can use library methods
-	     // attach this as an extension to the library
-	     $.fn.playingCards = playingCards;
-	}
+    if ($.fn) {
+         // we can use library methods
+         // attach this as an extension to the library
+         $.fn.playingCards = playingCards;
+    }
     /*
-	 * requires jquery (currently)
-	 */
+     * requires jquery (currently)
+     */
     playingCards.prototype.spread = function(dest) {
         if (!this.conf.el && !dest) {
             return false;
         }
         var to = this.conf.el || dest,
-			l = this.cards.length,
-			i;
+            l = this.cards.length,
+            i;
         to.html('');
         // clear (just a demo)
         for (i = 0; i < l; i++) {
             to.append(this.cards[i].getHTML());
         }
     };
-	/**
-	 * generate (and cache) html for the card
-	 * 
-	 * @return string The HTML block to show the card
-	 */
+    /**
+     * generate (and cache) html for the card
+     * 
+     * @return string The HTML block to show the card
+     */
     playingCards.card.prototype.getHTML = function() {
         if (this.html) {
             return this.html;
@@ -74,11 +77,11 @@
         this.html = strBuild.join('');
         return this.html;
     };
-	/**
- 	 * build the middle of the playing card HTML
-	 *
-	 * @return string The HTML block for the middle of the card
- 	 */
+    /**
+      * build the middle of the playing card HTML
+     *
+     * @return string The HTML block for the middle of the card
+      */
     playingCards.card.prototype.buildIconHTML = function() {
         // TODO: could we optimize this with a for loop that breaks/continues to named positions?
         if (this.rank === "A") {
@@ -86,17 +89,18 @@
         }
         if (this.rank === "J" || this.rank === "Q" || this.rank === "K" || this.rank === "N") {
             var n = 'D';
+            var imgPrefix = this.conf.imgPrefix || '';
             if (!this.conf.singleFace) {
                 n = this.suit;
             }
             return [
             '<div class="suit A1">', this.suitCode, '</div>',
-            '<img class="suit ', this.rank, ' face" src="img/', this.rank, n, '.gif"/>',
+            '<img class="suit ', this.rank, ' face" src="', imgPrefix, 'img/', this.rank, n, '.gif"/>',
             '<div class="suit C5 flip">', this.suitCode, '</div>'
             ];
         }
         var ret = [],
-			list = ['4', '5', '6', '7', '8', '9', '10'];
+            list = ['4', '5', '6', '7', '8', '9', '10'];
         // all of these will have A1, A5, C1, C5 icons
         if (list.indexOf(this.rank) !== -1) {
             ret = ret.concat([

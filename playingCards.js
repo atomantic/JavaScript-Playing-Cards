@@ -55,7 +55,7 @@ if (Array.indexOf === undefined) {
     playingCards.prototype.init = function() {    
          this.cards = [];
         var o = this.conf,
-            l,i,s,r;
+            l,i,s,r,j;
         // populate draw pile
         for (i = 0; i < o.decks; i++) {
             // standard
@@ -66,10 +66,10 @@ if (Array.indexOf === undefined) {
                 }
             }
             // jokers
-            for (i = 0; i < o.jokers; i++) {
+            for (j = 0; j < o.jokers; j++) {
                 l = this.cards.length;
                 // suit will always be 1 or 2
-                this.cards[l] = new playingCards.card("N", o.jokerText, (i % 2) + 1, '');
+                this.cards[l] = new playingCards.card("N", o.jokerText, (j % 2) + 1, '');
             }
         }
     };

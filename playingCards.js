@@ -69,7 +69,7 @@ if (Array.indexOf === undefined) {
             for (j = 0; j < o.jokers; j++) {
                 l = this.cards.length;
                 // suit will always be 1 or 2
-                this.cards[l] = new playingCards.card("N", o.jokerText, (i % 2) + 1, '');
+                this.cards[l] = new playingCards.card("N", o.jokerText, (j % 2) + 1, '');
             }
         }
     };

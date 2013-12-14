@@ -153,7 +153,7 @@ if (Array.indexOf === undefined) {
         "renderMode": 'css',
         // For a coustom " of "-String
         "ofString": " of ",
-        "startShuffled": false,
+        "startShuffled": true,
         "jokers": 2,
         "jokerText": "Joker",
         "ranks": {

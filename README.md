@@ -38,3 +38,6 @@ override defaults for playingCards() and for card() by adding new properties to 
 
 The repository holds a demo in index.html, which is published on the github project page:
 [Demo](http://atomantic.github.com/JavaScript-Playing-Cards)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/atomantic/javascript-playing-cards/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

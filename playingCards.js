@@ -2,12 +2,12 @@
 /**
  * playingCards is a standard card deck library
  * This can be used to play standard card games (which will be additional rule modules attached to this set)
- * 
+ *
  * usage: var cardDeck = new playingCards(conf);
  * override defaults for playingCards() and for card() with
  *    playingCards.defaults
  *    playingCards.card.defaults
- * 
+ *
  * @author Copyright (c) 2010 Adam Eivy (antic | atomantic)
  * @license Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -52,10 +52,10 @@ if (Array.indexOf === undefined) {
     /**
      * initializer - builds the deck
      */
-    playingCards.prototype.init = function() {    
-         this.cards = [];
+    playingCards.prototype.init = function() {
+        this.cards = [];
         var o = this.conf,
-            l,i,s,r;
+            l,i,s,r,j;
         // populate draw pile
         for (i = 0; i < o.decks; i++) {
             // standard
@@ -66,15 +66,15 @@ if (Array.indexOf === undefined) {
                 }
             }
             // jokers
-            for (i = 0; i < o.jokers; i++) {
+            for (j = 0; j < o.jokers; j++) {
                 l = this.cards.length;
                 // suit will always be 1 or 2
-                this.cards[l] = new playingCards.card("N", o.jokerText, (i % 2) + 1, '');
+                this.cards[l] = new playingCards.card("N", o.jokerText, (j % 2) + 1, '');
             }
         }
     };
     // TODO: create more methods:
-    // playingCards.prototype.order (set to out-of-box ordering) 
+    // playingCards.prototype.order (set to out-of-box ordering)
     // -- do we want other special formations (like trick deck ordering systems that deal perfect hands)?
     // -- probably going to leave this as an extension option
     /**
@@ -91,7 +91,7 @@ if (Array.indexOf === undefined) {
         this.cards.push(card);
     };
     /**
-     * get the number of cards remaining in the deck 
+     * get the number of cards remaining in the deck
      * (easy enough just to call cardObject.cards.length but hey)
      */
     playingCards.prototype.count = function() {
@@ -118,6 +118,15 @@ if (Array.indexOf === undefined) {
             }
         }
     };
+
+    playingCards.prototype.orderByRank = function() {
+        this.cards.sort(compareRank);
+    }
+
+    playingCards.prototype.orderBySuit = function() {
+        this.init();
+    }
+
     /*
      * requires jquery (currently)
      * TODO: put this in a UI extension pack along with all the other demo methods
@@ -142,6 +151,8 @@ if (Array.indexOf === undefined) {
         "decks": 1,
         // TODO: enable 'font' option -- loading cards.ttf
         "renderMode": 'css',
+        // For a coustom " of "-String
+        "ofString": " of ",
         "startShuffled": true,
         "jokers": 2,
         "jokerText": "Joker",
@@ -170,13 +181,13 @@ if (Array.indexOf === undefined) {
 
     /**
      * create a playing card
-     * 
+     *
      * @param string rank The numeric or letter value of the card (short value)
      * @param string rankString The full text representation of the rank (localized)
      * @param string suit The letter value of the suite (short value)
      * @param string suitString The full text representation of the suit (localized)
      * @param obj conf Overriding configuration
-     * 
+     *
      * @return object The card object
      */
     playingCards.card = function(rank, rankString, suit, suitString, conf) {
@@ -210,8 +221,7 @@ if (Array.indexOf === undefined) {
      * get the text representation of the card
      */
     playingCards.card.prototype.toString = function() {
-        // TODO: localize "of"
-        return this.suitString !== "" ? this.rankString + " of " + this.suitString: this.rankString;
+        return this.suitString !== "" ? this.rankString + playingCards.defaults.ofString + this.suitString: this.rankString;
     };
 
     /**
@@ -226,4 +236,31 @@ if (Array.indexOf === undefined) {
         }
         return o;
     }
+
+    /**
+     * Compare functions
+     */
+    function compareRank(a, b) {
+        var intRegex = /^\d+$/;
+
+        if (a.rank == b.rank)                       return 0;
+        if (a.rank == "N")                          return 1;
+        if (b.rank == "N")                          return -1;
+        if (a.rank == "A")                          return 1;
+        if (b.rank == "A")                          return -1;
+        if (!isNaN(a.rank - b.rank))                return a.rank - b.rank;
+        if (a.rank == "K" && b.rank == "J")         return 1;
+        if (a.rank == "J" && b.rank == "K")         return -1;
+        if (a.rank == "K" && b.rank == "Q")         return 1;
+        if (a.rank == "Q" && b.rank == "K")         return -1;
+        if (a.rank == "Q" && b.rank == "J")         return 1;
+        if (a.rank == "J" && b.rank == "Q")         return -1;
+        if (a.rank == "K" && intRegex.test(b.rank)) return 1;
+        if (a.rank == "Q" && intRegex.test(b.rank)) return 1;
+        if (a.rank == "J" && intRegex.test(b.rank)) return 1;
+        if (intRegex.test(a.rank) && b.rank == "K") return -1;
+        if (intRegex.test(a.rank) && b.rank == "Q") return -1;
+        if (intRegex.test(a.rank) && b.rank == "J") return -1;
+    }
+
 })(this,this.document);

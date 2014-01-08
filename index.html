@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <title>atomantic/JavaScript-Playing-Cards @ GitHub</title>
-    
+
     <link rel="stylesheet" type="text/css" media="all" href="playingCards.ui.css"/>
     <style type="text/css">
         body {
@@ -31,7 +31,7 @@
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
 
-    
+
     h2{
         clear:both;
     }
@@ -39,7 +39,7 @@
         display:none;color:#f00;border:1px solid #f60;padding:5px;margin:5px;
     }
     </style>
-    
+
 </head>
 
 <body>
@@ -77,6 +77,8 @@
     <input type="button" id="draw" value="draw a card" />
     <input type="button" id="addCard" value="add drawn card back" />
     <input type="button" id="shuffleDraw" value="shuffle, then draw" />
+    <input type="button" id="orderByRank" value="order by rank" />
+    <input type="button" id="orderBySuit" value="order by suit" />
     <h2>Card Deck</h2>
     <div id="cardDeck"></div>
     <h2>Your Hand</h2>
@@ -91,7 +93,7 @@
         $(document).ready(function(){
             var cardDeck = $("#cardDeck").playingCards();
             cardDeck.spread(); // show it
-    
+
             var hand = [];
             var showError = function(msg){
                 $('#error').html(msg).show();
@@ -119,7 +121,15 @@
                 hand[hand.length] = c;
                 cardDeck.spread();
                 showHand();
-            };
+            }
+            var doOrderByRank = function(){
+                cardDeck.orderByRank();
+                cardDeck.spread(); // update card table
+            }
+            var doOrderBySuit = function(){
+                cardDeck.orderBySuit();
+                cardDeck.spread(); // update card table
+            }
             $('#shuffler').click(doShuffle);
             $('#draw').click(doDrawCard);
             $('#shuffleDraw').click(function(){
@@ -136,6 +146,9 @@
                 cardDeck.addCard(c);
                 cardDeck.spread();
             });
+            $('#orderByRank').click(doOrderByRank);
+            $('#orderBySuit').click(doOrderBySuit);
+
         });
         /*
         // if we weren't using jquery to handle the document ready state, we would do this:
@@ -146,7 +159,7 @@
         } else {
             window.onload = function() {initPlayingCards();}
         }
-        function initPlayingCards() { 
+        function initPlayingCards() {
             cardDeck = new playingCards();
         }
         */

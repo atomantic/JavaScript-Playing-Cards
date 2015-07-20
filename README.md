@@ -20,6 +20,8 @@ Note: This library was really just something that I wanted to build for the sake
 
 If I were to re-write this for a particular game/use-case, I'd probably change the API a bit. Additionally, I'd add methods for managing hands/players, which is not part of the existing library.
 
+On the flip-side, since you obviously like playing cards, you might be interested in my hand-painted, beetle-themed playing card deck, which I'll be releasing to Kickstarter ~Aug 1, 2015: http://bit.ly/beetledeck
+
 #Usage
 
 If you are only using playingCards.js:  

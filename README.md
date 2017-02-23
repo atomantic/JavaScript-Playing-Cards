@@ -48,7 +48,7 @@ https://github.com/atomantic/JavaScript-Playing-Cards/blob/master/index.html
 * shuffle() - shuffle the deck
 * orderByRank() - orders the existin cards by rank
 * orderBySuit() - calls init() again (TODO: this should probably order the existing cards in the deck by suit, but I was lazy)
-* spread() - (ui only) lay out the cards in the DOM
+* spread($destinationElement, slowly) - (ui only) lay out the cards in the DOM, optionally with a slow placement
 * count() - return the number of cards remaining in the deck
 * addCard() - return a card from the drawn pile back to the top of the deck
 * draw() - draw a card from the top of the deck (stored in the draw pile)

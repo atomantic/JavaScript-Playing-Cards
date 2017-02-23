@@ -1,7 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
@@ -14,30 +12,28 @@
           background-color: #fff;
           font-family: "Helvetica,Arial,FreeSans";
           color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 860px;
-    }
+        }
+        #container {
+          margin: 0 auto;
+          width: 860px;
+        }
         h1 { font-size: 40px; color: #64052a; margin-bottom: 3px; }
         h1 .small { font-size: 0.4em; }
         h1 a { text-decoration: none }
         h2 { font-size: 1.5em; color: #64052a; }
-    h3 { text-align: center; color: #64052a; }
-    a { color: #64052a; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-        pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-
-
-    h2{
-        clear:both;
-    }
-    #error{
-        display:none;color:#f00;border:1px solid #f60;padding:5px;margin:5px;
-    }
+        h3 { text-align: center; color: #64052a; }
+        a { color: #64052a; }
+        .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+        .download { float: right; }
+            pre { background: #000; color: #fff; padding: 15px;}
+        hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+        .footer { text-align:center; padding-top:30px; font-style: italic; }
+        h2{
+            clear:both;
+        }
+        #error{
+            display:none;color:#f00;border:1px solid #f60;padding:5px;margin:5px;
+        }
     </style>
 
 </head>
@@ -74,6 +70,7 @@
     <input type="button" id="draw" value="draw a card" />
     <input type="button" id="addCard" value="add drawn card back" />
     <input type="button" id="shuffleDraw" value="shuffle, then draw" />
+    <input type="button" id="shuffleSpreadSlow" value="shuffle, then layout slowly" />
     <input type="button" id="orderByRank" value="order by rank" />
     <input type="button" id="orderBySuit" value="order by suit" />
     <h2>Card Deck</h2>
@@ -133,6 +130,10 @@
             $('#shuffleDraw').click(function(){
                 doShuffle();
                 doDrawCard();
+            });
+            $('#shuffleSpreadSlow').click(function(){
+                doShuffle();
+                cardDeck.spread(null, true); // update card table
             });
             $('#addCard').click(function(){
                 if(!hand.length){

@@ -1,4 +1,4 @@
-#License
+# License
 JavaScript & CSS:  
 @author Adam Eivy (antic | atomantic)  
 @link [http://adameivy.com/JavaScript-Playing-Cards/](http://adameivy.com/JavaScript-Playing-Cards/)  
@@ -12,7 +12,7 @@ Card Face images:
 @link [http://david.bellot.free.fr/svg-cards/](http://david.bellot.free.fr/svg-cards/)  
 @license [http://creativecommons.org/licenses/by-sa/2.5/](http://creativecommons.org/licenses/by-sa/2.5/)  
 
-#What it does
+# What it does
 
 The library comes in multiple parts. You can either just use the playingCard.js library, which has no UI rendering (just creates deck objects with the standard methods) or you can add on the playingCards.ui.js library, which adds the ability to render the cards to the page.
 
@@ -22,7 +22,7 @@ If I were to re-write this for a particular game/use-case, I'd probably change t
 
 On the flip-side, since you obviously like playing cards, you might be interested in my hand-painted, beetle-themed playing card deck, which I'll be releasing to Kickstarter ~Aug 1, 2015: http://bit.ly/beetledeck
 
-#Usage
+# Usage
 
 If you are only using playingCards.js:  
 
@@ -38,11 +38,11 @@ override defaults for playingCards() and for card() by adding new properties to 
 
 	playingCards.card.defaults
 
-##Example Implementation
+## Example Implementation
 For a rough example of implementation, look at the code for the demo page:
 https://github.com/atomantic/JavaScript-Playing-Cards/blob/master/index.html
 
-#API Docs (simple version)
+# API Docs (simple version)
 
 * init() - builds the deck (and shuffles it), automatically called when initializing an instance
 * shuffle() - shuffle the deck
@@ -53,7 +53,7 @@ https://github.com/atomantic/JavaScript-Playing-Cards/blob/master/index.html
 * addCard() - return a card from the drawn pile back to the top of the deck
 * draw() - draw a card from the top of the deck (stored in the draw pile)
 
-#Demo
+# Demo
 
 The repository holds a demo in index.html, which is published on the github project page:
 [Demo](http://atomantic.github.com/JavaScript-Playing-Cards)
